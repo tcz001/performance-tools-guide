@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>linux-performance-guide</title>
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
+  <script type="text/javascript">
+    function moveTo(text, target) {
+	let targetAttr = target.attr(['x','y','width','height']) 
+	let targetMiddle = { x: targetAttr.x + targetAttr.width/2, y: targetAttr.y + targetAttr.height/2}
+	text.move(targetMiddle.x, targetMiddle.y-7).font({ family: 'Trebuchet MS', weight: 'bold', size: '13px', anchor: 'middle' })
+    }
+    function draw() {
+        var draw = SVG().addTo('div.a').size(400, 800)
+        var app = draw.rect(400, 100).attr({ fill: 'rgb(253, 209, 209)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('Application'), app)
+
+        var syslib = draw.rect(180, 30).move(220, 70).attr({ fill: 'rgb(253, 209, 209)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('System Libraries'), syslib)
+
+        var syscall = draw.rect(400, 50).move(0, 50*2).attr({ fill: 'rgb(254, 252, 215)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('System Call Interface'), syscall)
+
+        var vfs    = draw.rect(150, 45).move(0, 50*3).attr({ fill: 'rgb(203, 220, 253)', stroke: '#eee', 'stroke-width': 3})
+        var fs     = draw.rect(150, 45).move(0, 50*3+45).attr({ fill: 'rgb(203, 220, 253)', stroke: '#eee', 'stroke-width': 3})
+        var volume = draw.rect(150, 45).move(0, 50*3+45*2).attr({ fill: 'rgb(203, 220, 253)', stroke: '#eee', 'stroke-width': 3})
+        var bdi    = draw.rect(150, 45).move(0, 50*3+45*3).attr({ fill: 'rgb(203, 220, 253)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('VFS'), vfs)
+	moveTo(draw.text('File System'), fs)
+	moveTo(draw.text('Volume Manager'), volume)
+	moveTo(draw.text('Block Device Int.'), bdi)
+
+        var socket = draw.rect(150, 45).move(150, 50*3)     .attr({ fill: 'rgb(217, 234, 204)', stroke: '#eee', 'stroke-width': 3})
+        var tcpudp = draw.rect(150, 45).move(150, 50*3+45)  .attr({ fill: 'rgb(217, 234, 204)', stroke: '#eee', 'stroke-width': 3})
+        var ip = draw.rect(150, 45).move(150, 50*3+45*2).attr({ fill: 'rgb(217, 234, 204)', stroke: '#eee', 'stroke-width': 3})
+        var ether = draw.rect(150, 45).move(150, 50*3+45*3).attr({ fill: 'rgb(217, 234, 204)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('Sockets'), socket)
+	moveTo(draw.text('TCP/UDP'), tcpudp)
+	moveTo(draw.text('IP'), ip)
+	moveTo(draw.text('Ethernet'), ether)
+
+        var sched = draw.rect(100, 60).move(300, 50*3).attr({ fill: 'rgb(255, 240, 205)', stroke: '#eee', 'stroke-width': 3})
+        var vm = draw.rect(100, 60).move(300, 50*3+60).attr({ fill: 'rgb(255, 240, 205)', stroke: '#eee', 'stroke-width': 3})
+        var clock = draw.rect(100, 60).move(300, 50*3+60*2).attr({ fill: 'rgb(255, 240, 205)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('Scheduler'), sched)
+	moveTo(draw.text('Virtual Memory'), vm)
+	moveTo(draw.text('Clocksource'), clock)
+        var dev = draw.rect(400, 50).move(0, 50*3+60*3).attr({ fill: 'rgb(193, 237, 253)', stroke: '#eee', 'stroke-width': 3})
+        var firm = draw.rect(400, 50).move(0, 50*4+60*3).attr({ fill: 'rgb(209, 244, 238)', stroke: '#eee', 'stroke-width': 3})
+	moveTo(draw.text('Device Driver'), dev)
+	moveTo(draw.text('Firmware'), firm)
+    }
+    SVG.on(document, 'DOMContentLoaded', draw)
+  </script>
+</head>
+<body>
+	<div class="a"/>
+	<div class="b" style="file://"/>
+</body>
+</html>
